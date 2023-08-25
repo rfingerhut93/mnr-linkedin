@@ -10,9 +10,9 @@ const ContestList = ({initialContests}) => {
   // load data to be displayed (runs on render)
   useEffect(() => {
     // need an http client (use fetch or axios)
-    fetchContests().then((data) => {
+    fetchContests().then((contests) => {
       // causes component to rerender.
-      setContests(data.contests);
+      setContests(contests);
     });
     // add dependency array [] so that the useEffect is only called if different between renders.
   }, []);

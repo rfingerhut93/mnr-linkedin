@@ -3,6 +3,7 @@ import os from "node:os";
 
 import config from "./config";
 import apiRouter from "./api-router";
+import serverRender from "./render";
 
 const server = express();
 
@@ -14,9 +15,11 @@ server.set("view engine", "ejs");
 // Using mock API endpoint
 server.use("/api", apiRouter);
 
-server.get("/", (req, res) => {
+server.get("/", async (req, res) => {
+  // await on serverRender
+  const initialMarkup = await serverRender();
   res.render("index", {
-    initialContent: "Loading...",
+    initialMarkup,
   });
 });
 
