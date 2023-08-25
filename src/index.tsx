@@ -1,16 +1,16 @@
 import { createRoot } from "react-dom/client";
-import axios from "axios";
-
 import App from "./components/app";
-import { API_SERVER_URL } from "./public-config";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
 
-// need an http client (use fetch or axios)
-axios.get(`${API_SERVER_URL}/contests`).then((resp) => {
-    console.log(resp.data);
-  });
+    // avoid react waiting on data
+    // first {} "expression" are for dynamic value 
+    // then pass in an object "contests".
+    // in this case, use empty array until data is loaded from contest-list component.
+    root.render(
+      <App initialData={ {contests: []} } />
+    );
+  
 
 
-root.render(<App />);
