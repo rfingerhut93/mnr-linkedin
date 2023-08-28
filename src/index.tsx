@@ -9,7 +9,7 @@ const root = createRoot(container);
     // then pass in an object "contests".
     // in this case, use empty array until data is loaded from contest-list component.
     root.render(
-      <App initialData={ {contests: []} } />
+      <App initialData={(window as any).initialData} />
     );
   
 

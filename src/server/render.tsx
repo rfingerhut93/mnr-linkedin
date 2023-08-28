@@ -9,11 +9,13 @@ import App from "../components/app";
 const serverRender = async () => {
     const contests = await fetchContests();
 
-
     // Once data is loaded, render app component
-    ReactDOMServer.renderToString(
+    const initialMarkup = ReactDOMServer.renderToString(
         <App initialData={{contests}} />
     );  
+
+    // data and html is included in server resposne.
+    return {initialMarkup, initialData: {contests}};
 };
 
 export default serverRender;

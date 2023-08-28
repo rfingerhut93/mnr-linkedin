@@ -4,6 +4,7 @@ import { fetchContests } from "../api-client";
 
 // displays ALL contests-previews in database.
 const ContestList = ({initialContests}) => {
+  debugger;
   //once the data is rendered, update (use a state element).
   const [contests, setContests] = useState(initialContests);
 
