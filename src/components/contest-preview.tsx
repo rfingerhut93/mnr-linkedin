@@ -7,7 +7,8 @@ const ContestPreview = ({contest, onClick}) => {
         event.preventDefault();
 
         // Navigate to a new view by using a state element to make react rerender.
-        onClick();
+        // pass in specific contest id.
+        onClick(contest.id);
     }
     return (
     <div className="contest-preview" onClick={handleClick}>
