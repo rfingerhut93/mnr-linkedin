@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchContest } from "../api-client";
+import Header from "./header";
 
 const Contest = ({id}) => {
     // object on the state to force rerender
@@ -12,13 +13,16 @@ const Contest = ({id}) => {
 
 
     return (
-        <div className="contest">
-            <div className="title">Contest Description</div>
-            {contest ? 
-                (<div className="description">{contest.description}</div>) : 
-                (<div className="loading">Loading...</div>)
-            }
-        </div>
+        <>
+            <Header message={contest ? contest.contestName : "Loading..."} />
+            <div className="contest">
+                <div className="title">Contest Description</div>
+                {contest ? 
+                    (<div className="description">{contest.description}</div>) : 
+                    (<div className="loading">Loading...</div>)
+                }
+            </div>
+        </>
     );
 };
 
