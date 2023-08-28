@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
-
 import { MONGODB_URI, DATABASE_NAME } from "./config";
 
 let connectedClient;
+
 
 export const connectClient = async () => {
   if (connectedClient) {

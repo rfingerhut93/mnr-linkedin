@@ -2,17 +2,26 @@
 
 import express from "express";
 import cors from "cors";
+import { connectClient } from "./db";
 
 // creates router object to include on server
 const router = express.Router();
 router.use(cors());
 
-// bring in test data
-import testData from "../test-data.json"
 
-router.get("/contests", (req, res) => {
+router.get("/contests", async (req, res) => {
     // get the data from MongoDB
-    res.send({contests: testData});
+    const client = await connectClient();
+
+    // get data from connected Mongo client:
+    // returns an array of contests
+    const contests = await client.collection("contests").find().project({
+        // tells mongodb to only include these fields.
+        id: 1,
+        categoryName: 1,
+        contestName: 1,
+    }).toArray();
+    res.send({contests: contests});
 })
 
 export default router;
