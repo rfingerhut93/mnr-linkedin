@@ -3,10 +3,11 @@ import ContestPreview from "./contest-preview";
 import { fetchContests } from "../api-client";
 
 // displays ALL contests-previews in database.
-const ContestList = ({initialContests}) => {
+const ContestList = ({initialContests, onContestClick}) => {
   debugger;
   //once the data is rendered, update (use a state element).
   const [contests, setContests] = useState(initialContests);
+  
 
   // load data to be displayed (runs on render)
   useEffect(() => {
@@ -22,7 +23,7 @@ const ContestList = ({initialContests}) => {
         <div className="contest-list">
         {/* map array to html elements */}
         {contests.map( (contest) => {
-          return <ContestPreview key={contest.id} contest={contest}/>
+        return <ContestPreview key={contest.id} contest={contest} onClick={onContestClick}/>
         })}
       </div>
     );

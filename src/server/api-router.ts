@@ -24,4 +24,17 @@ router.get("/contests", async (req, res) => {
     res.send({contests: contests});
 })
 
+// get details for single contest
+// use param to allow dynamic pathway (i.e. path to some type of contest id)
+// use URL friendly id to test
+router.get("/contest/:contestId", async (req, res) => {
+    // connect the client first or get connect client first
+    const client = await connectClient();
+
+    //find returns a list of documents, so we use find one instead here.
+    const contest = await client.collection("contests").findOne({id: req.params.contestId})
+
+    res.send({contest});
+});
+
 export default router;
