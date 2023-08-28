@@ -30,8 +30,7 @@ const App = ({initialData}) => {
 
   return (
     <div className="container">
-      <Header message="Naming Contests" />
-
+      
       {pageContent()}
     </div>
   );
