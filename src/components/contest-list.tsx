@@ -4,11 +4,9 @@ import { fetchContests } from "../api-client";
 
 // displays ALL contests-previews in database.
 const ContestList = ({initialContests, onContestClick}) => {
-  debugger;
   //once the data is rendered, update (use a state element).
   const [contests, setContests] = useState(initialContests);
   
-
   // load data to be displayed (runs on render)
   useEffect(() => {
     // need an http client (use fetch or axios)

@@ -14,7 +14,8 @@ const App = ({initialData}) => {
   const pageContent = () => {
     switch (page) {
       case "contestList":
-        return <ContestList initialContests ={initialData.contests} onContestClick={navigateToContest} />;
+        return <ContestList initialContests ={initialData.contests} 
+                onContestClick={navigateToContest} />;
     
       case "contest":
         return "....";
@@ -33,3 +34,4 @@ const App = ({initialData}) => {
 };
 
 export default App;
+
