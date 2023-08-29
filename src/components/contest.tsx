@@ -5,13 +5,14 @@ import Header from "./header";
 const Contest = ({initialContest}) => {
     // object on the state to force rerender
     const [contest, setContest] = useState(initialContest);
-    // useEffect(() => {
-        
-    //         fetchContest(contest.id).then((contest) => {
-    //             setContest(contest);
-    //         });
-        
-    // }, [contest.id]);
+
+    useEffect(() => {
+        if (!contest.names){
+            fetchContest(contest.id).then((contest) => {
+                setContest(contest);
+            });
+        }
+    }, [contest.id, contest.names]);
 
 
     return (
