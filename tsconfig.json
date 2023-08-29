@@ -13,6 +13,8 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "useUnknownInCatchVariables": false
+    
   },
-  "include": ["src"]
+  "include": ["src"],
 }
+

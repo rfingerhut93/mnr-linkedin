@@ -1,21 +1,26 @@
+
 // has to be tsx because it will have jsx syntax
 
-import ReactDOMServer from "react-dom/server"
-
+import ReactDOMServer from "react-dom/server";
+import { fetchContest, fetchContestList } from "../api-client";
 import App from "../components/app";
-import { fetchContestList } from "../api-client";
+
 
 // returns initial markup for server to use
-const serverRender = async () => {
-    const contests = await fetchContestList();
+const serverRender = async (req) => {
+  const { contestId } = req.params;
 
-    // Once data is loaded, render app component
-    const initialMarkup = ReactDOMServer.renderToString(
-        <App initialData={{contests}} />
-    );  
+  const initialData = contestId
+    ? { currentContest: await fetchContest(contestId) }
+    : { contests: await fetchContestList() };
 
-    // data and html is included in server resposne.
-    return {initialMarkup, initialData: {contests}};
+  // Once data is loaded, render app component
+  const initialMarkup = ReactDOMServer.renderToString(
+    <App initialData={initialData} />,
+  );
+
+  // data and html is included in server resposne.
+  return { initialMarkup, initialData };
 };
 
 export default serverRender;

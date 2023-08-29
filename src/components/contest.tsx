@@ -2,25 +2,24 @@ import { useEffect, useState } from "react";
 import { fetchContest } from "../api-client";
 import Header from "./header";
 
-const Contest = ({id}) => {
+const Contest = ({initialContest}) => {
     // object on the state to force rerender
-    const [contest, setContest] = useState(null);
-    useEffect(() => {
-        fetchContest(id).then((contestData) => {
-            setContest(contestData);
-        });
-    }, [id]);
+    const [contest, setContest] = useState(initialContest);
+    // useEffect(() => {
+        
+    //         fetchContest(contest.id).then((contest) => {
+    //             setContest(contest);
+    //         });
+        
+    // }, [contest.id]);
 
 
     return (
         <>
-            <Header message={contest ? contest.Name : "Loading..."} />
+            <Header message={contest.contestName} />
             <div className="contest">
                 <div className="title">Contest Description</div>
-                {contest ? 
-                    (<div className="description">{contest.description}</div>) : 
-                    (<div className="loading">Loading...</div>)
-                }
+                <div className="description">{contest.description}</div>
             </div>
         </>
     );

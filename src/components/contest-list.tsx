@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ContestPreview from "./contest-preview";
 import { fetchContestList } from "../api-client";
+import ContestPreview from "./contest-preview";
 import Header from "./header";
 
 // displays ALL contests-previews in database.
@@ -23,9 +23,11 @@ const ContestList = ({initialContests, onContestClick}) => {
         <Header message="Naming Contests" />
           <div className="contest-list">
             {/* map array to html elements */}
-            {contests.map( (contest) => {
-              return <ContestPreview key={contest.id} contest={contest} onClick={onContestClick}/>
-              })
+            {contests?.map( (contest) => {
+              return (
+                <ContestPreview key={contest.id} contest={contest} onClick={onContestClick}/>
+              );
+            })
             }
           </div>
       </>

@@ -15,9 +15,11 @@ server.set("view engine", "ejs");
 // Using mock API endpoint
 server.use("/api", apiRouter);
 
-server.get("/", async (req, res) => {
+// for root path
+server.get(["/", "/contest/:contestId"], async (req, res) => {
   // await on serverRender
-  const {initialMarkup, initialData} = await serverRender();
+  // make serverRender aware of the request info (which URL is it for)
+  const {initialMarkup, initialData} = await serverRender(req);
   res.render("index", {
     initialMarkup,
     initialData,
@@ -30,3 +32,4 @@ server.listen(parseInt(config.PORT), config.HOST, () => {
     `Free Mem: ${os.freemem() / 1024 / 1024}`,
   );
 });
+
