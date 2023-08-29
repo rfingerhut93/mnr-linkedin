@@ -14,7 +14,7 @@ const Contest = ({id}) => {
 
     return (
         <>
-            <Header message={contest ? contest.contestName : "Loading..."} />
+            <Header message={contest ? contest.Name : "Loading..."} />
             <div className="contest">
                 <div className="title">Contest Description</div>
                 {contest ? 
