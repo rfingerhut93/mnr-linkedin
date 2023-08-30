@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchContest } from "../api-client";
 import Header from "./header";
 
-const Contest = ({initialContest}) => {
+const Contest = ({initialContest, onContestListClick}) => {
     // object on the state to force rerender
     const [contest, setContest] = useState(initialContest);
 
@@ -14,6 +14,10 @@ const Contest = ({initialContest}) => {
         }
     }, [contest.id, contest.names]);
 
+    const handleContestListClick = (event) => {
+        event.preventDefault();
+        onContestListClick();
+    }
 
     return (
         <>
@@ -22,6 +26,8 @@ const Contest = ({initialContest}) => {
                 <div className="title">Contest Description</div>
                 <div className="description">{contest.description}</div>
             </div>
+
+            <a href="/" className="link" onClick={handleContestListClick}>Contest List</a>
         </>
     );
 };

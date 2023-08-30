@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
+
 import Contest from "./contest";
 import ContestList from "./contest-list";
-
-// App will have a page variable, contestList or contest
 
 const App = ({ initialData }) => {
   const [page, setPage] = useState<"contestList" | "contest">(
@@ -13,9 +12,7 @@ const App = ({ initialData }) => {
   >(initialData.currentContest);
 
   useEffect(() => {
-    // hook into history api to make page rerender.
     window.onpopstate = (event) => {
-      // determine which page to render based off of state of event.
       const newPage = event.state?.contestId
         ? "contest"
         : "contestList";
@@ -24,9 +21,7 @@ const App = ({ initialData }) => {
     };
   }, []);
 
-  // Displays specific contest data based off of received contest id
-  const navigateToContest = (contestId: any) => {
-    // navigate to new url
+  const navigateToContest = (contestId) => {
     window.history.pushState(
       { contestId },
       "",
@@ -34,6 +29,12 @@ const App = ({ initialData }) => {
     );
     setPage("contest");
     setCurrentContest({ id: contestId });
+  };
+
+  const navigateToContestList = () => {
+    window.history.pushState({}, "", "/");
+    setPage("contestList");
+    setCurrentContest(undefined);
   };
 
   const pageContent = () => {
@@ -46,7 +47,12 @@ const App = ({ initialData }) => {
           />
         );
       case "contest":
-        return <Contest initialContest={currentContest} />;
+        return (
+          <Contest
+            initialContest={currentContest}
+            onContestListClick={navigateToContestList}
+          />
+        );
     }
   };
 
