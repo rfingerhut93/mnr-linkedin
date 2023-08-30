@@ -56,7 +56,6 @@ const Contest = ({initialContest, onContestListClick}) => {
                         <button type="submit">Submit</button>
                     </form>
                 </div>
-
             <a href="/" className="link" onClick={handleContestListClick}>Contest List</a>
             </div>
         </>

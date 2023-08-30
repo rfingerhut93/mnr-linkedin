@@ -24,3 +24,13 @@ export const addNewNameToContest = async ({contestId, newNameValue}) => {
 
   return resp.data.updatedContest;
 };
+
+// send data to server
+export const addContest = async (contestData) => {
+  const resp = await axios.post(
+    `${API_SERVER_URL}/contests`,
+    contestData,
+  );
+
+  return resp.data.contest;
+};

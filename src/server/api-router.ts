@@ -63,4 +63,26 @@ router.post("/contest/:contestId", async (req, res) => {
   res.send({updatedContest: doc.value});
 });
 
+// receive data
+router.post("/contests/", async(req, res) => {
+  const { contestName, categoryName, description} = req.body;
+
+  const client = await connectClient();
+  const doc = await client
+    .collection("contests")
+    .insertOne({
+      id: contestName.toLowerCase().replace(/\s/g, '-'),
+      contestName,
+      categoryName,
+      description,
+      names: [],
+    });
+  
+    const contest = await client
+    .collection("contests")
+    .findOne({ _id: doc.insertedId });
+
+  res.send({ contest });
+});
+
 export default router;
