@@ -1,25 +1,4 @@
 
-// const ContestPreview = ({contest, onClick}) => {
-
-//   const handleClick = (event) => {
-//     event.preventDefault();
-
-//     onClick(contest.id);
-//   };
-
-//   return (
-//     <div className="contest-preview link" onClick={handleClick}>
-//       <div className="category">{contest.categoryName}</div>
-//       <div className="contest">{contest.contestName}</div>
-//     </div>
-//   );
-// };
-
-// export default ContestPreview;
-
-
-//displays contest name and category of a SINGLE contest
-
 const ContestPreview = ({contest, onClick}) => {
 
     // Will display info of one contest when clicked
