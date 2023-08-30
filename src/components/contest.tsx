@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchContest } from "../api-client";
+import { addNewNameToContest, fetchContest } from "../api-client";
 import Header from "./header";
 
 const Contest = ({initialContest, onContestListClick}) => {
@@ -19,10 +19,12 @@ const Contest = ({initialContest, onContestListClick}) => {
         onContestListClick();
     };
 
-    const handleNewNameSubmit = (event) => {
+    const handleNewNameSubmit = async (event) => {
         event.preventDefault();
-        console.log(event.target.newName.value);
-    }
+        const newNameInput = event.target.newName;
+        const updatedContest = await addNewNameToContest({contestId: contest.id, newNameValue: newNameInput.value});
+        console.log(updatedContest);
+    };
 
     return (
         <>

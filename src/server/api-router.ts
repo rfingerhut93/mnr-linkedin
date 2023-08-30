@@ -5,7 +5,10 @@ import { connectClient } from "./db";
 
 const router = express.Router();
 router.use(cors());
+//middleware needed to parse req.body
+router.use(express.json());
 
+//Give info for contest list. (API endpoint)
 router.get("/contests", async (req, res) => {
   const client = await connectClient();
 
@@ -23,6 +26,7 @@ router.get("/contests", async (req, res) => {
   res.send({ contests });
 });
 
+//Give info for single contest (API endpoint)
 router.get("/contest/:contestId", async (req, res) => {
   const client = await connectClient();
 
@@ -31,6 +35,32 @@ router.get("/contest/:contestId", async (req, res) => {
     .findOne({ id: req.params.contestId });
 
   res.send({ contest });
+});
+
+// (API endpoint) Use post for side-effects
+router.post("/contest/:contestId", async (req, res) => {
+  const client = await connectClient();
+  const {newNameValue} = req.body;
+  const doc = await client
+    .collection("contests")
+    .findOneAndUpdate(
+      { id: req.params.contestId },
+      {
+        $push: {
+          // new name to be pushed to names array
+          names: {
+            //make id URL friendly by replacing spaces with -'s.
+            id: newNameValue.toLowerCase().replace(/\s/g, '-'),
+            name: newNameValue,
+            timestamp: new Date(),
+          }
+        }
+      },
+      // returns new doc AFTER update
+      {returnDocument: "after"},
+    );
+
+  res.send({updatedContest: doc.value});
 });
 
 export default router;
